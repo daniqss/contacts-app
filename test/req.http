@@ -1,0 +1,18 @@
+GET http://localhost:3000/contacts
+
+### Recuperar un contacto por nombre
+GET http://localhost:3000/contacts/jose
+
+### Crea un nuevo contacto
+POST http://localhost:3000/contacts
+Content-Type: application/json
+
+{
+    "name": "John Doe",
+    "birthday": "1986-05-12",
+    "phone": "1234567890",
+    "email": "fdsa@fdsa",
+}
+
+### Borra un contacto y devuelve el contacto borrado
+DELETE http://localhost:3000/contacts/jose
