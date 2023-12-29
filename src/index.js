@@ -1,9 +1,9 @@
 const express = require('express')
 const app = express()
-// const port = process.env.PORT ?? 3000
-const port = 3000
+const port = process.env.PORT ?? 3000 ?? 3001
 
 app.use(express.json())
+app.disable('x-powered-by')
 
 const contacts = [
     {
@@ -21,8 +21,8 @@ const contacts = [
 ]
 
 
-const { routes } = require('./routes/routes.js')
-routes(app)
+const { router } = require('./routes/router')
+router(app, contacts)
 
 app.use((req, res) => {
     res.status(404)
@@ -34,5 +34,7 @@ app.listen(port, () => {
     console.log(`Listening on http://localhost:${port}`)
 })
 
-exports.app = app
-exports.contacts = contacts
+module.exports = {
+    app,
+    contacts
+}

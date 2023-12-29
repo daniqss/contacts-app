@@ -1,19 +1,22 @@
-const contacts = [
-    {
-        name: 'jose',
-        birthday: '2004-11-04',
-        phone: 643271289,
-        email: 'jose@joseando.com'
-    },
-    {
-        name: 'maria',
-        birthday: '1990-01-01',
-        phone: 618571534,
-        email: 'maria@gmail.com'
-    }
-]
+const { validateContact, validatePartialContact } = require('../schemas/contacts')
 
-const router = (app) => {
+const router = (app, contacts) => {
+
+    // CREATE
+    app.post('/contacts', (req, res) => {
+        const newContact = validateContact(req.body)
+
+        if (!newContact.success) {
+            console.error(newContact.error.message)
+            return res.status(400).json({ "error": JSON.parse(newContact.error.message) })
+        }
+
+        console.log(`POST ${req.path} with data ${JSON.stringify(newContact)}`)
+        contacts.push(newContact.data)
+        res.status(200)
+            .json(newContact.data)
+    })
+
 
     // READ
     app.get('/contacts', (req, res) => {
@@ -26,19 +29,12 @@ const router = (app) => {
         const name = req.params.name
         console.log(`GET ${req.path}`)
         const contact = contacts.find(contact => contact.name === name)
-
+        
+        if (contact === undefined) {
+            return res.status(404).send('Contact not found')
+        }
+        
         res.status(200).json(contact)
-    })
-
-    // CREATE
-    app.post('/contacts', (req, res) => {
-        const newContact = req.body
-        console.log(`POST ${req.path} with data ${JSON.stringify(newContact)}`)
-
-
-        contacts.push(newContact)
-        res.status(200)
-            .json(newContact)
     })
 
 
@@ -62,5 +58,6 @@ const router = (app) => {
     })
 }
 
-exports.routes = router
-exports.contacts = contacts
+module.exports = {
+    router
+}

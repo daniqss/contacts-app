@@ -3,8 +3,7 @@ const chaiHttp = require('chai-http')
 const { describe, it } = require('mocha')
 // const { it } = require('mocha')
 
-const app = require('../src/index').app
-const contacts = require('../src/routes/routes').contacts
+const { app, contacts } = require('../src/index')
 chai.use(chaiHttp)
 
 

@@ -8,10 +8,10 @@ POST http://localhost:3000/contacts
 Content-Type: application/json
 
 {
-    "name": "John Doe",
+    "name": "Pepito Grillo",
     "birthday": "1986-05-12",
-    "phone": "1234567890",
-    "email": "fdsa@fdsa",
+    "phone": 1234567890,
+    "email": "fdsa@gmail.com"
 }
 
 ### Borra un contacto y devuelve el contacto borrado
