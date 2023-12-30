@@ -16,3 +16,11 @@ Content-Type: application/json
 
 ### Borra un contacto y devuelve el contacto borrado
 DELETE http://localhost:3000/contacts/jose
+
+### Actualiza un contacto y devuelve el contacto actualizado
+PATCH http://localhost:3000/contacts/jose
+Content-Type: application/json
+
+{
+  "phone": 693177685
+}

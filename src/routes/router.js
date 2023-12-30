@@ -39,8 +39,30 @@ const router = (app, contacts) => {
 
 
     // UPDATE
-    app.put('/contacts/:name', (req, res) => {
+    app.patch('/contacts/:name', (req, res) => {
+        const updatedContact = validatePartialContact(req.body)
+
+        if (!result.success) {
+            return res.status(400).json({ error: JSON.parse(result.error.message) })
+          }
+        
+        const name = req.params.name
+        const contactIndex = contacts.find(contact => contact.name === name)
+
+        if (contactIndex === undefined) {
+            return res.status(404).send('Contact not found')
+        }
+
+        const updateContact = {
+            ...contacts[contactIndex],
+            ...updatedContact
+        }
+        contacts[contactIndex] = updateContact
+        res.json(updateContact)
+
+        // FIX THIS
     })
+
 
     // DELETE
     app.delete('/contacts/:name', (req, res) => {
