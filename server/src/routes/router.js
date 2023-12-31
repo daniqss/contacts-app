@@ -39,7 +39,7 @@ const router = (app, contacts) => {
 
 
     // UPDATE
-    app.patch('/contacts/:name', (req, res) => {
+    app.patch('/api/v1/:name', (req, res) => {
         const updatedContact = validatePartialContact(req.body)
 
         if (!result.success) {
@@ -65,7 +65,7 @@ const router = (app, contacts) => {
 
 
     // DELETE
-    app.delete('/contacts/:name', (req, res) => {
+    app.delete('/api/v1/:name', (req, res) => {
         const name = req.params.name
         console.log(`DELETE ${req.path}`)
 

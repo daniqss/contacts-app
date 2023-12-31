@@ -1,10 +1,10 @@
-GET http://localhost:3000/contacts
+GET http://localhost:3000/api/v1/
 
 ### Recuperar un contacto por nombre
-GET http://localhost:3000/contacts/jose
+GET http://localhost:3000/api/v1/jose
 
 ### Crea un nuevo contacto
-POST http://localhost:3000/contacts
+POST http://localhost:3000/api/v1/
 Content-Type: application/json
 
 {
@@ -15,10 +15,10 @@ Content-Type: application/json
 }
 
 ### Borra un contacto y devuelve el contacto borrado
-DELETE http://localhost:3000/contacts/jose
+DELETE http://localhost:3000/api/v1/jose
 
 ### Actualiza un contacto y devuelve el contacto actualizado
-PATCH http://localhost:3000/contacts/jose
+PATCH http://localhost:3000/api/v1/maria
 Content-Type: application/json
 
 {
