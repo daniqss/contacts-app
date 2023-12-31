@@ -40,27 +40,29 @@ const router = (app, contacts) => {
 
     // UPDATE
     app.patch('/api/v1/:name', (req, res) => {
-        const updatedContact = validatePartialContact(req.body)
-
+        // Validate request body
+        const result = validatePartialContact(req.body)
+        
         if (!result.success) {
             return res.status(400).json({ error: JSON.parse(result.error.message) })
-          }
+        }
         
+        // Search for wanted contact
         const name = req.params.name
-        const contactIndex = contacts.find(contact => contact.name === name)
-
-        if (contactIndex === undefined) {
+        const contactIndex = contacts.findIndex(contact => contact.name === name)
+        
+        if (contactIndex === -1) {
             return res.status(404).send('Contact not found')
         }
-
-        const updateContact = {
-            ...contacts[contactIndex],
-            ...updatedContact
-        }
-        contacts[contactIndex] = updateContact
-        res.json(updateContact)
-
-        // FIX THIS
+        
+        // Update contact
+        const updatedContact = {
+            ...contacts[contactIndex], // Copia todas las propiedades del contacto existente
+            ...result.data // Sobrescribe las propiedades actualizadas desde result.data
+        };
+        console.log(result, updatedContact)
+        contacts[contactIndex] = updatedContact;
+        res.json(updatedContact);
     })
 
 
