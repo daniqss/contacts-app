@@ -2,7 +2,7 @@
 
 ## Endpoints
 
-### 1. `GET /api/v1
+### 1. `GET /api/v1`
 
 - **Description:** Retrieve all contacts.
 - **Request Type:** `GET`
@@ -10,7 +10,7 @@
     - **Status Code:** 200 OK
     - **Body:** Array of contacts
 
-### 2. `GET /api/v1/:name
+### 2. `GET /api/v1/:name`
 
 - **Description:** Retrieve a specific contact by name.
 - **Request Type:** `GET`
