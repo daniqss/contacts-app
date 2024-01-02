@@ -1,8 +1,9 @@
-const express = require('express')
-const app = express()
+import express, { json } from 'express'
+import cors from 'cors'
+export const app = express()
 const port = process.env.PORT ?? 3000 ?? 3001
 
-app.use(express.json())
+app.use(json())
 app.use(cors({
     origin: (origin, callback) => {
       const ACCEPTED_ORIGINS = [
@@ -22,7 +23,9 @@ app.use(cors({
 }))
 app.disable('x-powered-by')
 
-const contacts = [
+import { router } from './routes/router.js'
+
+export const contacts = [
     {
         name: 'jose',
         birthday: '2004-11-04',
@@ -38,7 +41,6 @@ const contacts = [
 ]
 
 
-const { router } = require('./routes/router')
 router(app, contacts)
 
 app.use((req, res) => {
@@ -50,8 +52,3 @@ app.use((req, res) => {
 app.listen(port, () => {
     console.log(`Listening on http://localhost:${port}`)
 })
-
-module.exports = {
-    app,
-    contacts
-}
