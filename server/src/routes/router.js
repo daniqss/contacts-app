@@ -1,6 +1,6 @@
-const { validateContact, validatePartialContact } = require('../schemas/contacts')
+import { validateContact, validatePartialContact } from '../schemas/contacts.js'
 
-const router = (app, contacts) => {
+export const router = (app, contacts) => {
 
     // CREATE
     app.post('/api/v1/', (req, res) => {
@@ -80,8 +80,4 @@ const router = (app, contacts) => {
         contacts.splice(contacts.indexOf(contact), 1)
         res.status(200).json(contact)
     })
-}
-
-module.exports = {
-    router
 }

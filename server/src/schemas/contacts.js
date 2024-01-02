@@ -1,27 +1,22 @@
-const zod = require('zod')
-const moment = require('moment')
+import z from 'zod';
+import moment from 'moment';
 
-const contactSchema = zod.object({
-    name: zod.string(),
-    birthday: zod.string().refine((value) => {
+const contactSchema = z.object({
+    name: z.string(),
+    birthday: z.string().refine((value) => {
         const dateMoment = moment(value, "YYYY-MM-DD", true); // El último parámetro permite el modo estricto
-        return dateMoment.isValid();
+        return dateMoment.z.isValid();
     }, {
         message: "Invalid date format. Expected format: YYYY-MM-DD",
     }),
-    phone: zod.number(),
-    email: zod.string().email(),
+    phone: z.number(),
+    email: z.string().email(),
 });
 
-const validateContact = (contact) => {
+export const validateContact = (contact) => {
     return contactSchema.safeParse(contact)
 }
 
-const validatePartialContact = (contact) => {
+export const validatePartialContact = (contact) => {
     return contactSchema.partial().safeParse(contact)
-}
-
-module.exports = {
-    validateContact,
-    validatePartialContact
 }
