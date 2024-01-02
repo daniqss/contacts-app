@@ -3,6 +3,23 @@ const app = express()
 const port = process.env.PORT ?? 3000 ?? 3001
 
 app.use(express.json())
+app.use(cors({
+    origin: (origin, callback) => {
+      const ACCEPTED_ORIGINS = [
+        'http://localhost:5171'
+      ]
+  
+      if (ACCEPTED_ORIGINS.includes(origin)) {
+        return callback(null, true)
+      }
+  
+      if (!origin) {
+        return callback(null, true)
+      }
+  
+      return callback(new Error('Not allowed by CORS'))
+    }
+}))
 app.disable('x-powered-by')
 
 const contacts = [
