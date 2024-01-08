@@ -1,0 +1,14 @@
+[
+    {
+        "name": "jose",
+        "birthday": "2004-11-04",
+        "phone": 643271289,
+        "email": "jose@joseando.com"
+    },
+    {
+        "name": "maria",
+        "birthday": "1990-01-01",
+        "phone": 618571534,
+        "email": "maria@gmail.com"
+    }
+]
