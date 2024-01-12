@@ -1,17 +1,17 @@
 import { Router } from 'express'
 
-import { MovieController } from '../controllers/movies.js'
+import { ContactsController } from '../controllers/contacts.js'
 
-const contactsRouter = Router()
+export const contactsRouter = Router()
 
-contactsRouter.get('/api/v1/', ContactsController.getAll)
-contactsRouter.get('/api/v1/:id', ContactsController.get)
+contactsRouter.get('/api/v1', ContactsController.getAll)
+contactsRouter.get('/api/v1/:id', ContactsController.getById)
 contactsRouter.get('/api/v1/:name', ContactsController.getByName)
 
 contactsRouter.post('/api/v1', ContactsController.create)
-contactsRouter.delete('api/v1/:id', ContactsController.delete)
+contactsRouter.delete('api/v1/:id', ContactsController.deleteById)
 contactsRouter.delete('api/v1/:name', ContactsController.deleteByName)
-contactsRouter.patch('/api/v1/:id', ContactsController.update)
+contactsRouter.patch('/api/v1/:id', ContactsController.updateById)
 contactsRouter.patch('/api/v1/:name', ContactsController.updateByName)
 // export const router = (app, contacts) => {
 

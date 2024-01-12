@@ -1,7 +1,11 @@
 import { randomUUID } from 'node:crypto'
-import { readJSON } from '../utils/read-json.js'
+import { readJSON, writeJSON } from '../utils/read-json.js'
 
-const contacts = readJSON('../../contacts.json')
+
+const contacts = readJSON('./contacts.json')
+    .catch(error => {
+        console.error('Error al leer el archivo JSON:', error);
+    });
 
 export class ContactModel  {
     static async getAll({ age = null }) {
