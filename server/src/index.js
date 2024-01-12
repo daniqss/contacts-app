@@ -1,5 +1,5 @@
 import express, { json } from 'express'
-import { contactsRouter } from './routes/movies.js'
+import { contactsRouter } from './routes/contacts.js'
 
 export const app = express()
 app.use(json())
@@ -9,6 +9,6 @@ app.use('/api/v1/', contactsRouter)
 
 const PORT = process.env.PORT ?? 3000
 
-app.listen(port, () => {
-    console.log(`Listening on http://localhost:${port}`)
+app.listen(PORT, () => {
+    console.log(`Listening on http://localhost:${PORT}`)
 })
