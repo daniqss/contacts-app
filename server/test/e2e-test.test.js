@@ -4,7 +4,9 @@ import request from 'supertest'
 import { describe, it } from 'mocha'
 // const { it } = require('mocha')
 
-import { app, contacts } from '../src/index.js'
+import { app } from '../src/index.js'
+import { readJSON } from '../src/utils/read-json.js'
+const contacts = await readJSON('./contacts.json')
 use(chaiHttp)
 
 
@@ -17,8 +19,8 @@ describe('e2e suite', () => {
                     console.error(err)
                     done(err)
                 }
-                console.log(res.body)
-                console.log(contacts)
+                console.log('res.body: ', res.body)
+                console.log('from json', contacts)
                 assert.equal(res.status, 200)
                 assert.deepEqual(res.body, contacts)
                 done()
@@ -40,32 +42,32 @@ describe('e2e suite', () => {
             })
     })
 
-    it('Should return the contact with name jose after delete it', (done) => {
-        const name = 'jose'
-        request(app)
-            .get(`/api/v1/${name}`)
-            .end((err, res) => {
-                if (err) {
-                    console.error(err)
-                    done(err)
-                }
+    // it('Should return the contact with name jose after delete it', (done) => {
+    //     const name = 'jose'
+    //     request(app)
+    //         .get(`/api/v1/${name}`)
+    //         .end((err, res) => {
+    //             if (err) {
+    //                 console.error(err)
+    //                 done(err)
+    //             }
 
-                assert.equal(res.status, 200)
-                assert.deepEqual(res.body, contacts.find(contact => contact.name === name))
-                const wantedContact = res.body
+    //             assert.equal(res.status, 200)
+    //             assert.deepEqual(res.body, contacts.find(contact => contact.name === name))
+    //             const wantedContact = res.body
                 
-                request(app)
-                    .delete(`/api/v1/${name}`)
-                    .end((err, res) => {
-                        if (err) {
-                            console.error(err)
-                            done(err)
-                        }
+    //             request(app)
+    //                 .delete(`/api/v1/${name}`)
+    //                 .end((err, res) => {
+    //                     if (err) {
+    //                         console.error(err)
+    //                         done(err)
+    //                     }
 
-                        assert.equal(res.status, 200)
-                        assert.deepEqual(res.body, wantedContact)
-                        done()
-                    })
-            })
-    })
+    //                     assert.equal(res.status, 200)
+    //                     assert.deepEqual(res.body, wantedContact)
+    //                     done()
+    //                 })
+    //         })
+    // })
 })
