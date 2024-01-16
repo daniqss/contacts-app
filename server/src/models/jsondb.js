@@ -2,19 +2,27 @@ import { randomUUID } from 'node:crypto'
 import { readJSON, writeJSON } from '../utils/read-json.js'
 
 
-const contacts = await readJSON('./contacts.json')
+const contacts = await readJSON('../database/contacts.json')
 
 export class ContactModel {
     static async getAll ({ age = null }) {
-        console.log(contacts)
         if (age === null) {
             return contacts
         }
         return contacts.filter(contact => contact.age === age)
     }
 
-    static async getContact (id) {
-        return contacts.find(contact => contact.id === id)
+    static async getContact ({ name }) {
+        const contact = contacts.filter(contact => contact.name === name)
+
+        switch (contact.length) {
+            case 0:
+                return null
+            case 1:
+                return contact[0]
+            default:
+                return contact
+        }
     }
 
     static async create ({ contact }) {
@@ -22,22 +30,20 @@ export class ContactModel {
             id: randomUUID(),
             ...contact
         }
-        console.log(newContact)
-        console.log(contact)
         contacts.push(newContact)
         
         return newContact
     }
 
-    static async delete (id) {
+    static async delete ({ id }) {
         const index = contacts.findIndex(contact => contact.id === id)
         if (index === -1) {
-            return false
+            return null
         }
-
+        const deletedContact = contacts[index]
         contacts.splice(index, 1)
         writeJSON('./contacts.json', contacts)
-        return true
+        return deletedContact
     }
 
     static async update ({ id, input }) {

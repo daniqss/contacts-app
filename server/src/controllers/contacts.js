@@ -1,5 +1,10 @@
-import { ContactModel } from '../models/local-json.js'
-import { validateContact, validatePartialContact, validateParam } from '../schemas/contact.js'
+import { ContactModel } from '../models/jsondb.js'
+import {
+    validateContact,
+    validatePartialContact,
+    validateName,
+    validateId 
+} from '../schemas/contact.js'
 
 
 
@@ -11,13 +16,15 @@ export class ContactsController {
     }
     
     static async getContact (req, res) { 
-        const { id } = req.params
-        const result = validateParam(id)
+        const { name } = req.params
+        const result = validateName(name)
+
         if (!result.success) {
             return res.status(400).json({ error: JSON.parse(result.error.message) })
         }
 
-        const contact = await ContactModel.getById({ id: result.data })
+        // In case of various contacts with the same name, return an array
+        const contact = await ContactModel.getContact({ name: result.data })
         
         if (!contact) {
             return res.status(404).send('Contact not found')
@@ -32,7 +39,6 @@ export class ContactsController {
             console.error(result.error.message)
             return res.status(400).json({ error: JSON.parse(result.error.message) })
         }
-
         const newContact = await ContactModel.create({ contact: result.data })
 
         res.status(201).json(newContact)
@@ -40,7 +46,7 @@ export class ContactsController {
 
     static async delete (req, res) {
         const { id } = req.params
-        const result = validateParam(id)
+        const result = validateId(id)
         if (!result.success) {
             return res.status(400).json({ error: JSON.parse(result.error.message) })
         }
@@ -55,13 +61,16 @@ export class ContactsController {
 
     static async update (req, res) {
         const { id } = req.params
-        const param = validateParam(id)
+        const param = validateId(id)
         const result = validatePartialContact(req.body)
-        if (!param.success || !result.success) {
+        if (!param.success) {
+            return res.status(400).json({ error: JSON.parse(param.error.message) })
+        }
+        if (!result.success) {
             return res.status(400).json({ error: JSON.parse(result.error.message) })
         }
 
-        const contact = await ContactModel.update({ id: result.data, input: req.body })
+        const contact = await ContactModel.update({ id: param.data, input: result.data })
         if (!contact) {
             return res.status(404).send('Contact not found')
         }

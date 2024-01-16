@@ -22,10 +22,10 @@ export const validatePartialContact = (contact) => {
     return contactSchema.partial().safeParse(contact)
 }
 
-export const validateParam = (param) => {
-    const result = z.string(param)
-    if (result.uuid()) {
-        return result.safeParse()
-    }
-    return result.safeParse()
+export const validateName = (name) => {
+    return z.string().safeParse(name)
+}
+
+export const validateId = (id) => {
+    return z.string().uuid().safeParse(id)
 }
