@@ -4,15 +4,12 @@ import { ContactsController } from '../controllers/contacts.js'
 
 export const contactsRouter = Router()
 
-contactsRouter.get('/api/v1', ContactsController.getAll)
-contactsRouter.get('/api/v1/:id', ContactsController.getById)
-contactsRouter.get('/api/v1/:name', ContactsController.getByName)
+contactsRouter.get('/contacts', ContactsController.getAll)
+contactsRouter.get('/contacts/:name', ContactsController.getContact)
 
-contactsRouter.post('/api/v1', ContactsController.create)
-contactsRouter.delete('api/v1/:id', ContactsController.deleteById)
-contactsRouter.delete('api/v1/:name', ContactsController.deleteByName)
-contactsRouter.patch('/api/v1/:id', ContactsController.updateById)
-contactsRouter.patch('/api/v1/:name', ContactsController.updateByName)
+contactsRouter.post('/contacts', ContactsController.create)
+contactsRouter.delete('/contacts/:id', ContactsController.delete)
+contactsRouter.patch('/contacts/:id', ContactsController.update)
 // export const router = (app, contacts) => {
 
 //     // CREATE

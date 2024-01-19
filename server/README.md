@@ -69,4 +69,10 @@ npm run dev
 npm run prod
 ```
 
+## TODO
+- [] Complete tests
+- [] Add authentication
+- [] MongoDB integration
+- [] Age as query parameter
+
 

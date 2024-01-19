@@ -1,26 +1,22 @@
-import fs from 'fs/promises';
-import path from 'path';
+import { exit } from 'process'
+import { readFile, writeFile } from 'fs/promises'
 
-
-export const readJSON = async (relativePath) => {
+export const readJSON = async (path) => {
     try {
-        const absolutePath = path.resolve(__dirname, relativePath);
-        const content = await fs.readFile(absolutePath, 'utf-8');
-        return JSON.parse(content);
+        return JSON.parse(await readFile(path, 'utf-8'))
     } catch (error) {
-        console.error('Error al leer el archivo JSON:', error);
-        throw error;
+        console.error(`Error occurred reading ${path}\n`)
+        console.error(error)
+        process.exit(1)
     }
-};
+}
 
 export const writeJSON = async (path, data) => {
-    const absolutePath = path.resolve(path)
-
     try {
-        await fs.writeFile(absolutePath, JSON.stringify(data, null, 2), 'utf-8');
-        console.log('Datos escritos exitosamente en el archivo JSON.');
+        await writeFile(path, JSON.stringify(data), 'utf-8')
     } catch (error) {
-        console.error('Error al escribir en el archivo JSON:', error);
-        throw error;
+        console.error(`Error occurred writing ${path}\n`)
+        console.error(error)
+        exit(1)
     }
-};
+}

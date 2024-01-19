@@ -1,10 +1,12 @@
-GET http://localhost:3000/api/v1/
+GET http://localhost:3000/v1/contacts
 
 ### Recuperar un contacto por nombre
-GET http://localhost:3000/api/v1/jose
+GET http://localhost:3000/v1/contacts/Pepito%20Grillo
+### Recuperar contacto jose
+GET http://localhost:3000/v1/contacts/jose
 
 ### Crea un nuevo contacto
-POST http://localhost:3000/api/v1/
+POST http://localhost:3000/v1/contacts
 Content-Type: application/json
 
 {
@@ -15,12 +17,12 @@ Content-Type: application/json
 }
 
 ### Borra un contacto y devuelve el contacto borrado
-DELETE http://localhost:3000/api/v1/jose
+DELETE http://localhost:3000/v1/contacts/2e3159b7-a1d2-43c4-af73-2afa784b9273
 
 ### Actualiza un contacto y devuelve el contacto actualizado
-PATCH http://localhost:3000/api/v1/maria
+PATCH http://localhost:3000/v1/contacts/1c14040d-fcf9-4b32-ba53-3ea653395fc6
 Content-Type: application/json
 
 {
-  "phone": 693177685
+  "phone": 693155685
 }

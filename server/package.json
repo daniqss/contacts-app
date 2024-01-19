@@ -1,6 +1,7 @@
 {
   "type": "module",
   "dependencies": {
+    "apicache": "^1.6.3",
     "cors": "^2.8.5",
     "esm": "^3.2.25",
     "express": "^4.18.2",
@@ -16,14 +17,7 @@
     "supertest": "^6.3.3"
   },
   "eslintConfig": {
-    "plugins": [
-      "prettier"
-    ],
-    "extends": [
-      "eslint:recommended",
-      "plugin:prettier/recommended",
-      "prettier/standard"
-    ],
+    "extends": "standard",
     "rules": {
       "no-trailing-spaces": "off",
       "no-multiple-empty-lines": "off",
