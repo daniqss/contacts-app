@@ -1,8 +1,8 @@
 import { randomUUID } from 'node:crypto'
 import { readJSON, writeJSON } from '../utils/read-json.js'
 
-
-const contacts = await readJSON('../database/contacts.json')
+const jsonPath = './database/contacts.json'
+const contacts = await readJSON(jsonPath)
 
 export class ContactModel {
     static async getAll ({ age = null }) {
@@ -31,7 +31,7 @@ export class ContactModel {
             ...contact
         }
         contacts.push(newContact)
-        
+        writeJSON(jsonPath, contacts)
         return newContact
     }
 
@@ -42,7 +42,7 @@ export class ContactModel {
         }
         const deletedContact = contacts[index]
         contacts.splice(index, 1)
-        writeJSON('./contacts.json', contacts)
+        writeJSON(jsonPath, contacts)
         return deletedContact
     }
 
@@ -56,7 +56,7 @@ export class ContactModel {
         }
 
         contacts[index] = updatedContact
-        writeJSON('./contacts.json', contacts)
+        writeJSON(jsonPath, contacts)
         return updatedContact
     }
 }

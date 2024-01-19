@@ -1,21 +1,22 @@
-import fs from 'fs/promises'
-
+import { exit } from 'process'
+import { readFile, writeFile } from 'fs/promises'
 
 export const readJSON = async (path) => {
     try {
-        const content = await fs.readFile(path, 'utf-8')
-        return JSON.parse(content)
+        return JSON.parse(await readFile(path, 'utf-8'))
     } catch (error) {
-        console.error(`Error occurred reading ${path} : error`)
-        throw error
+        console.error(`Error occurred reading ${path}\n`)
+        console.error(error)
+        process.exit(1)
     }
 }
 
 export const writeJSON = async (path, data) => {
     try {
-        await fs.writeFile(path, JSON.stringify(data), 'utf-8')
+        await writeFile(path, JSON.stringify(data), 'utf-8')
     } catch (error) {
-        console.error(`Error occurred writing ${path} : error`)
-        throw error
+        console.error(`Error occurred writing ${path}\n`)
+        console.error(error)
+        exit(1)
     }
 }
