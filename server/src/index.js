@@ -11,10 +11,14 @@ app.disable('x-powered-by')
 app.use(corsMiddleware())
 
 app.use('/v1/', contactsRouter)
-app.use((res) => { res.status(404).send('404 Not Found😡') })
+app.use((req, res) => { res.status(404).send('404 Not Found😡') })
 
 const PORT = process.env.PORT ?? 3000
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
     console.log(`Listening on http://localhost:${PORT}`)
 })
+
+export const stop = () => {
+    server.close()
+}
