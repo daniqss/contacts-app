@@ -1,4 +1,4 @@
-import { ContactModel } from '../models/jsondb.js'
+import { ContactModel } from '../models/json/contact.js'
 import {
     validateContact,
     validatePartialContact,
