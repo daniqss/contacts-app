@@ -70,9 +70,9 @@ npm run prod
 ```
 
 ## TODO
-- [] Complete tests
-- [] Add authentication
-- [] MongoDB integration
-- [] Age as query parameter
+- [x] Complete tests
+- [ ] Add authentication
+- [ ] MongoDB integration
+- [x] Age as query parameter
 
 
