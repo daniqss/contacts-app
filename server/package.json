@@ -42,6 +42,6 @@
   },
   "scripts": {
     "test": "mocha --require esm --spec test/**/*.test.js",
-    "dev": "node --watch --trace-warnings src/index.js"
+    "dev": "node --watch --trace-warnings --env-file .env src/index.js"
   }
 }
