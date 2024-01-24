@@ -6,16 +6,18 @@ import {
 } from '../schemas/contactValidation.js'
 
 let ContactModel
-(async (env) => {
+await (async (env) => {
+    let module
     if (env === 'production') {
-        ContactModel = await import('../models/mongodb/contact.js')
+        module = await import('../models/mongodb/contact.js')
     } else if (env === 'development') {
-        ContactModel = await import('../models/json/contact.js')
+        module = await import('../models/json/contact.js')
     } else if (env === 'test') {
-        ContactModel = await import('../models/json/contact.js')
+        module = await import('../models/json/contact.js')
     } else {
         throw new Error('Invalid environment')
     }
+    ContactModel = module.default
 })(process.env.NODE_ENV)
 
 
