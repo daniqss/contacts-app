@@ -5,10 +5,9 @@ import { readJSON, writeJSON } from '../../utils/read-json.js'
 const jsonPath = './database/contacts.json'
 const contacts = await readJSON(jsonPath)
 
-export class ContactModel {
+export default class ContactModel {
     static async getAll ({ age }) {
         if (age != null) {
-            console.log('age', age)
             // eslint-disable-next-line eqeqeq
             return contacts.filter(contact => ageFromBirthday(contact.birthday) == age)
         }

@@ -1,86 +1,92 @@
 import { ageFromBirthday } from '../../utils/age.js'
-import { MongoClient, ServerApiVersion } from 'mongodb' 
-const uri = `mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_PASSWORD}@cluster0.xxsuhnj.mongodb.net/?retryWrites=true&w=majority`
-// Create a MongoClient with a MongoClientOptions object to set the Stable API version
+import { contactSchema } from '../../schemas/mongooseSchema.js'
+import { randomUUID } from 'node:crypto'
+import mongoose from 'mongoose'
 
-const client = new MongoClient(uri, {
-    serverApi: {
-        version: ServerApiVersion.v1,
-        strict: true,
-        deprecationErrors: true
-    }
+if (process.env.MONGODB_USER === null || process.env.MONGODB_PASSWORD === null) {
+    console.log('No MongoDB credentials provided')
+    process.exit(1)
+}
+const uri = `mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_PASSWORD}@cluster0.xxsuhnj.mongodb.net/?retryWrites=true&w=majority`
+
+mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
+
+const db = mongoose.connection
+
+db.on('error', console.error.bind(console, 'Cannot connect to MongoDB Atlas: \n'))
+
+db.once('open', () => {
+    console.log('Succeful connection to MongoDB Atlas')
 })
 
-async function connect () {
-    try {
-        await client.connect()
-        const database = client.db('database')
-        return database.collection('contacts')
-    } catch (error) {
-        console.error('Error connecting to the database')
-        console.error(error)
-        await client.close()
-    }
-}
 
-export class ContactModel {
+const Contacts = mongoose.model('Contact', contactSchema)
+
+export default class ContactModel {
     static async getAll ({ age = null }) {
-        const db = await connect()
-        const contacts = db.find({}).toArray()
-        
-        if (age != null) {
-            // eslint-disable-next-line eqeqeq
-            return contacts.filter(contact => ageFromBirthday(contact.birthday) == age)
+        try {
+            const contacts = await Contacts.find({}).exec()
+    
+            if (age != null) {
+                // eslint-disable-next-line eqeqeq
+                return contacts.filter((contact) => ageFromBirthday(contact.birthday) == age)
+            }
+            return contacts
+        } catch (error) {
+            console.error('Error obteining contacts:', error)
+            throw error
         }
-        return contacts
     }
 
-    // static async getContact ({ name }) {
-    //     const contact = contacts.filter(contact => contact.name === name)
 
-    //     switch (contact.length) {
-    //         case 0:
-    //             return null
-    //         case 1:
-    //             return contact[0]
-    //         default:
-    //             return contact
-    //     }
-    // }
+    static async getContact ({ name }) {
+        try {
+            const contact = await Contacts.findOne(name).exec()
+            return contact
+        } catch (error) {
+            console.error('Error obteining contacts:', error)
+            throw error
+        }
+    }
 
-    // static async create ({ contact }) {
-    //     const newContact = {
-    //         id: randomUUID(),
-    //         ...contact
-    //     }
-    //     contacts.push(newContact)
-    //     writeJSON(jsonPath, contacts)
-    //     return newContact
-    // }
+    static async create ({ contact }) {
+        try {
+            const newContact = {
+                id: randomUUID(),
+                ...contact
+            }
+            await Contacts.create(contact)
+            return newContact
+        } catch (error) {
+            console.error('Error al crear un contacto:', error)
+            throw error
+        }   
+    }
 
-    // static async delete ({ id }) {
-    //     const index = contacts.findIndex(contact => contact.id === id)
-    //     if (index === -1) {
-    //         return null
-    //     }
-    //     const deletedContact = contacts[index]
-    //     contacts.splice(index, 1)
-    //     writeJSON(jsonPath, contacts)
-    //     return deletedContact
-    // }
+    static async delete ({ id }) {
+        try {
+            const deletedContact = await Contacts.findByIdAndDelete(id).exec()
 
-    // static async update ({ id, input }) {
-    //     const index = contacts.findIndex(contact => contact.id === id)
-    //     const contact = contacts[index]
+            if (!deletedContact) {
+                return null
+            }
 
-    //     const updatedContact = {
-    //         ...contact,
-    //         ...input
-    //     }
+            return deletedContact.toObject()
+        } catch (error) {
+            console.error('Error al crear un contacto:', error)
+            throw error
+        }   
+    }
 
-    //     contacts[index] = updatedContact
-    //     writeJSON(jsonPath, contacts)
-    //     return updatedContact
-    // }
+    static async update ({ id, input }) {
+        try {
+            await Contacts.findByIdAndUpdate(id, input).exec()
+
+
+            return await Contacts.findById(id).exec()
+        } catch (error) {
+            console.error('Error al crear un contacto:', error)
+            throw error
+        }   
+    }
 }
-
