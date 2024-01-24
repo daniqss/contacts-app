@@ -1,7 +1,7 @@
 GET http://localhost:3000/v1/contacts
 
-### Recuperar los que tengan 34
-GET http://localhost:3000/v1/contacts?age=34
+### Recuperar los que tengan 37
+GET http://localhost:3000/v1/contacts?age=37
 
 
 ### Recuperar un contacto por nombre

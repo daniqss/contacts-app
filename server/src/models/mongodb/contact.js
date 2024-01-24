@@ -7,7 +7,7 @@ if (process.env.MONGODB_USER === null || process.env.MONGODB_PASSWORD === null) 
     console.log('No MongoDB credentials provided')
     process.exit(1)
 }
-const uri = `mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_PASSWORD}@cluster0.xxsuhnj.mongodb.net/?retryWrites=true&w=majority`
+const uri = `mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_PASSWORD}@cluster0.xxsuhnj.mongodb.net/contact-book?retryWrites=true&w=majority`
 
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
 
