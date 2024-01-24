@@ -7,6 +7,7 @@
     "express": "^4.18.2",
     "moment": "^2.30.1",
     "mongodb": "^6.3.0",
+    "mongoose": "^8.1.0",
     "zod": "^3.22.4"
   },
   "devDependencies": {
@@ -41,7 +42,8 @@
     }
   },
   "scripts": {
-    "test": "mocha --require esm --spec test/**/*.test.js",
-    "dev": "node --watch --trace-warnings --env-file .env src/index.js"
+    "test": "NODE_ENV=test mocha --require esm --spec test/**/*.test.js",
+    "dev": "NODE_ENV=development node --watch --trace-warnings src/index.js",
+    "prod": "NODE_ENV=production node --watch --env-file .env src/index.js"
   }
 }
