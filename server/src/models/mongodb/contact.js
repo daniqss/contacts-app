@@ -3,11 +3,11 @@ import { contactSchema } from '../../schemas/mongooseSchema.js'
 import { randomUUID } from 'node:crypto'
 import mongoose from 'mongoose'
 
-if (process.env.MONGODB_USER === null || process.env.MONGODB_PASSWORD === null) {
-    console.log('No MongoDB credentials provided')
+if (process.env.MONGODB_USER === null || process.env.MONGODB_PASSWORD === null || process.env.DB === null) {
+    console.log('No MongoDB info provided')
     process.exit(1)
 }
-const uri = `mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_PASSWORD}@cluster0.xxsuhnj.mongodb.net/contact-book?retryWrites=true&w=majority`
+const uri = `mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_PASSWORD}@cluster0.xxsuhnj.mongodb.net/${process.env.DB}?retryWrites=true&w=majority`
 
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
 
@@ -33,8 +33,7 @@ export default class ContactModel {
             }
             return contacts
         } catch (error) {
-            console.error('Error obteining contacts:', error)
-            throw error
+            console.error('Error obteining contacts:\n', error)
         }
     }
 
@@ -44,8 +43,7 @@ export default class ContactModel {
             const contact = await Contacts.findOne(name).exec()
             return contact
         } catch (error) {
-            console.error('Error obteining contacts:', error)
-            throw error
+            console.error('Error obteining contacts:\n', error)
         }
     }
 
@@ -58,8 +56,7 @@ export default class ContactModel {
             await Contacts.create(contact)
             return newContact
         } catch (error) {
-            console.error('Error al crear un contacto:', error)
-            throw error
+            console.error('Error al crear un contacto:\n', error)
         }   
     }
 
@@ -67,14 +64,11 @@ export default class ContactModel {
         try {
             const deletedContact = await Contacts.findByIdAndDelete(id).exec()
 
-            if (!deletedContact) {
-                return null
-            }
+            if (!deletedContact) return null
 
             return deletedContact.toObject()
         } catch (error) {
-            console.error('Error al crear un contacto:', error)
-            throw error
+            console.error('Error al crear un contacto:\n', error)
         }   
     }
 
@@ -85,8 +79,7 @@ export default class ContactModel {
 
             return await Contacts.findById(id).exec()
         } catch (error) {
-            console.error('Error al crear un contacto:', error)
-            throw error
+            console.error('Error al crear un contacto:\n', error)
         }   
     }
 }
