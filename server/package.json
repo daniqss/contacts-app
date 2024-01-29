@@ -42,7 +42,7 @@
     }
   },
   "scripts": {
-    "test": "NODE_ENV=test mocha --require esm --spec test/**/*.test.js",
+    "test": "NODE_ENV=test DB=test mocha --require esm --spec test/**/*.test.js",
     "dev": "NODE_ENV=development node --watch --trace-warnings src/index.js",
     "prod": "NODE_ENV=production node --watch --env-file .env src/index.js"
   }
