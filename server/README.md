@@ -2,7 +2,7 @@
 
 ## Endpoints
 
-### 1. `GET /api/v1`
+### 1. `GET /v1/contacts`
 
 - **Description:** Retrieve all contacts.
 - **Request Type:** `GET`
@@ -10,7 +10,7 @@
     - **Status Code:** 200 OK
     - **Body:** Array of contacts
 
-### 2. `GET /api/v1/:name`
+### 2. `GET /v1/contacts:name`
 
 - **Description:** Retrieve a specific contact by name.
 - **Request Type:** `GET`
@@ -21,7 +21,7 @@
     - **Body:** Contact details
     - **Status Code:** 404 Not Found (If the contact is not found)
 
-### 3. `POST /api/v1`
+### 3. `POST /v1/contacts`
 
 - **Description:** Create a new contact.
 - **Request Type:** `POST`
@@ -31,7 +31,7 @@
     - **Body:** New contact details
     - **Status Code:** 400 Bad Request (If the request body is invalid)
 
-### 4. `PATCH /api/v1/:name`
+### 4. `PATCH /v1/contacts:id`
 
 - **Description:** Update a specific contact by name.
 - **Request Type:** `PATCH`
@@ -44,7 +44,7 @@
     - **Status Code:** 400 Bad Request (If the request body is invalid)
     - **Status Code:** 404 Not Found (If the contact is not found)
 
-### 5. `DELETE /api/v1/:name`
+### 5. `DELETE /v1/contacts:id`
 
 - **Description:** Delete a specific contact by name.
 - **Request Type:** `DELETE`
@@ -72,7 +72,5 @@ npm run prod
 ## TODO
 - [x] Complete tests
 - [ ] Add authentication
-- [ ] MongoDB integration
+- [x] MongoDB integration
 - [x] Age as query parameter
-
-
