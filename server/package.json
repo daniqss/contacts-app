@@ -6,6 +6,8 @@
     "esm": "^3.2.25",
     "express": "^4.18.2",
     "moment": "^2.30.1",
+    "mongodb": "^6.3.0",
+    "mongoose": "^8.1.0",
     "zod": "^3.22.4"
   },
   "devDependencies": {
@@ -15,6 +17,15 @@
     "mocha": "^10.2.0",
     "standard": "^17.1.0",
     "supertest": "^6.3.3"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "none",
+    "arrowParens": "avoid",
+    "printWidth": 0,
+    "semi": false,
+    "tabWidth": 4,
+    "bracketSameLine": true
   },
   "eslintConfig": {
     "extends": "standard",
@@ -31,7 +42,8 @@
     }
   },
   "scripts": {
-    "test": "mocha --require esm --spec test/**/*.test.js",
-    "dev": "node --watch --trace-warnings src/index.js"
+    "test": "NODE_ENV=test DB=test mocha --require esm --spec test/**/*.test.js",
+    "dev": "NODE_ENV=development node --watch --trace-warnings src/index.js",
+    "prod": "NODE_ENV=production node --watch --env-file .env src/index.js"
   }
 }

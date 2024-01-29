@@ -1,15 +1,18 @@
+import { ageFromBirthday } from '../../utils/age.js'
 import { randomUUID } from 'node:crypto'
-import { readJSON, writeJSON } from '../utils/read-json.js'
+import { readJSON, writeJSON } from '../../utils/read-json.js'
 
 const jsonPath = './database/contacts.json'
 const contacts = await readJSON(jsonPath)
 
-export class ContactModel {
-    static async getAll ({ age = null }) {
-        if (age === null) {
-            return contacts
+export default class ContactModel {
+    static async getAll ({ age }) {
+        if (age != null) {
+            // eslint-disable-next-line eqeqeq
+            return contacts.filter(contact => ageFromBirthday(contact.birthday) == age)
         }
-        return contacts.filter(contact => contact.age === age)
+        
+        return contacts
     }
 
     static async getContact ({ name }) {

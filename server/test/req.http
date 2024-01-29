@@ -1,5 +1,9 @@
 GET http://localhost:3000/v1/contacts
 
+### Recuperar los que tengan 37
+GET http://localhost:3000/v1/contacts?age=37
+
+
 ### Recuperar un contacto por nombre
 GET http://localhost:3000/v1/contacts/Pepito%20Grillo
 ### Recuperar contacto jose
