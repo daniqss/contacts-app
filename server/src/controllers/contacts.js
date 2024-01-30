@@ -13,7 +13,7 @@ await (async (env) => {
     } else if (env === 'development') {
         module = await import('../models/json/contact.js')
     } else if (env === 'test') {
-        module = await import('../models/json/contact.js')
+        module = await import('../models/mongodb/contact.js')
     } else {
         throw new Error('Invalid environment')
     }
