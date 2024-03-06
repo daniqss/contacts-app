@@ -78,6 +78,12 @@ main {
 .contact-data {
   margin-top: 2em;
   text-align: left;
+  margin-right: 1em;
+  aside {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1em;
+  }
 }
 
 .contact-btns button {
@@ -97,7 +103,6 @@ main {
 
 .edit-btn,
 .remove-btn {
-  /* margin: 10 10 10 10; */
   background-color: #646cff;
   img {
     width: 27px;
