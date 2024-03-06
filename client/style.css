@@ -44,6 +44,18 @@ main {
   text-align: center;
 }
 
+#contact-book {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  background-color: #1a1a1a;
+  border-radius: 8px;
+  box-shadow: 0 0 2em #000000aa;
+  transition: box-shadow 300ms;
+  padding-bottom: 1em;
+  overflow: hidden; /* Evita que los elementos internos sobresalgan en columnas incompletas */
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
