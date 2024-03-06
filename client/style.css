@@ -83,7 +83,7 @@ main {
 .contact-btns button {
   /* background-color: #4CAF50; */
   color: white;
-  padding: 5px 10px;
+  /* padding: 5px 10px; */
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -100,8 +100,8 @@ main {
   /* margin: 10 10 10 10; */
   background-color: #646cff;
   img {
-    width: 20px;
-    height: 20px;
+    width: 27px;
+    height: 27px;
   }
   img:hover {
     filter: drop-shadow(0 0 2em #646cffaa);
