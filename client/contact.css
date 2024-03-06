@@ -1,0 +1,154 @@
+.logo {
+    height: 6em;
+    padding: 1.5em;
+    will-change: filter;
+    transition: filter 300ms;
+  }
+  .logo:hover {
+    filter: drop-shadow(0 0 2em #646cffaa);
+  }
+  .logo.vanilla:hover {
+    filter: drop-shadow(0 0 2em #f7df1eaa);
+  }
+  
+  .contact {
+    display: flex;
+    background-color: #1a1a1a;
+    border-radius: 8px;
+    box-shadow: 0 0 2em #000000aa;
+    transition: box-shadow 300ms;
+    padding-bottom: 1em;
+    img {
+      height: 10em;
+      padding: 1em;
+    }
+    h2 {
+      margin: 0;
+      padding: 1em;
+      font-size: 1.5em;
+      line-height: 1.1;
+      color: #ffffff;
+    }
+  }
+  
+  .contact-data {
+    margin-top: 2em;
+    text-align: left;
+    margin-right: 1em;
+    aside {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 1em;
+    }
+  }
+  
+  .contact-btns button {
+    /* background-color: #4CAF50; */
+    color: white;
+    /* padding: 5px 10px; */
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin-right: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    border-radius: 5px;
+  }
+  
+  .edit-btn,
+  .remove-btn {
+    background-color: #646cff;
+    img {
+      width: 27px;
+      height: 27px;
+    }
+    img:hover {
+      filter: drop-shadow(0 0 2em #646cffaa);
+    }
+  }
+  
+  .edit-btn {
+    background-color: #646cff;
+  }
+  
+  .remove-btn {
+    background-color: #ff6464;
+  }
+
+
+
+/* .contact-btns buttons {
+  align-items: center;
+  border: 1px solid transparent;
+  margin: 100 100 100 100;
+  display: flex;
+  cursor: pointer;
+  justify-content: center;
+  gap: 1em;
+  margin-top: 3em;
+  width: 3em; 
+  height: 3em; 
+  padding: 10px 20px;
+  padding: 0.5em; 
+} */
+
+/* .edit-btn,
+.remove-btn {
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  //overflow: hidden; Oculta el contenido que se desborde del botón
+  img {
+    /height: auto;
+    padding: 1.5em;
+    will-change: filter;
+    transition: filter 300ms;
+    width: 20px; 
+    height: 20px;
+    margin-right: 5px; 
+  }
+  img:hover {
+    filter: drop-shadow(0 0 2em #646cffaa);
+  }
+} */
+
+/* .edit-btn {
+  background-color: #646cff;
+}
+
+.remove-btn {
+  background-color: #ff6464;
+} */
+
+/* .edit-btn img,
+.remove-btn img {
+  width: 100%; // La imagen ocupará el 100% del ancho del botón
+  height: 100%; La imagen ocupará el 100% de la altura del botón 
+  object-fit: contain; //Ajusta la imagen para que quepa dentro del contenedor sin distorsiones 
+} */
+
+/* button {
+  content: none;
+  border-radius: 8px;
+  padding: 0.2em 0.5em; 
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+  width: 2em; 
+  height: 2em; 
+} */
+/* 
+button:hover {
+  border-color: #646cff;
+}
+
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}*/
