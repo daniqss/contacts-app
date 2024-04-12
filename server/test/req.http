@@ -14,10 +14,10 @@ POST http://localhost:3000/v1/contacts
 Content-Type: application/json
 
 {
-    "name": "Hello world",
-    "birthday": "1986-05-12",
-    "phone": 1234567890,
-    "email": "fdsa@gmail.com"
+    "name": "unamuno",
+    "birthday": "1890-05-12",
+    "phone": 677522367,
+    "email": "weon@gmail.com"
 }
 
 ### Borra un contacto y devuelve el contacto borrado

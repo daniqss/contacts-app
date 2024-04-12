@@ -53,7 +53,7 @@ main {
   box-shadow: 0 0 2em #000000aa;
   transition: box-shadow 300ms;
   padding-bottom: 1em;
-  overflow: hidden; /* Evita que los elementos internos sobresalgan en columnas incompletas */
+  overflow: hidden; 
 }
 
 @media (prefers-color-scheme: light) {
