@@ -89,7 +89,7 @@ npm run test-json
 
 ## TODO
 - [x] Complete tests
-- [-] MongoDB integration
+- [ ] Complete MongoDB integration
 - [x] Age as query parameter
 
 ## Frontend
