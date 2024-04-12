@@ -18,29 +18,6 @@
     "standard": "^17.1.0",
     "supertest": "^6.3.3"
   },
-  "prettier": {
-    "singleQuote": true,
-    "trailingComma": "none",
-    "arrowParens": "avoid",
-    "printWidth": 0,
-    "semi": false,
-    "tabWidth": 4,
-    "bracketSameLine": true
-  },
-  "eslintConfig": {
-    "extends": "standard",
-    "rules": {
-      "no-trailing-spaces": "off",
-      "no-multiple-empty-lines": "off",
-      "indent": [
-        "error",
-        4,
-        {
-          "SwitchCase": 1
-        }
-      ]
-    }
-  },
   "scripts": {
     "test-json": "NODE_ENV=development mocha --require esm --spec test/**/*.test.js",
     "test-mongo": "NODE_ENV=test DB=test mocha --require esm --spec test/**/*.test.js",
